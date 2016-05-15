@@ -2,6 +2,9 @@ module Statistics.Information.Utils.List where
 
 import Data.List
 
+repeatN :: Int -> a -> [a]
+repeatN n a = take n (repeat a)
+
 count :: Eq a => a -> [a] -> Int
 count x = length . filter (==x)
 

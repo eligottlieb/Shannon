@@ -1,6 +1,7 @@
 module Statistics.Information.Utils.Random where
 
 import Data.Matrix
+import Statistics.Information.Utils.List
 import System.Random
 
 splitN :: RandomGen g => Int -> g -> [g]
@@ -20,4 +21,3 @@ noisy g xs =
     intens = 1e-10
     n = nrows xs
     d = ncols xs
-    repeatN n a = take n (repeat a)
