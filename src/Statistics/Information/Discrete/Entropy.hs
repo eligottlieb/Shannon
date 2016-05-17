@@ -1,10 +1,11 @@
 module Statistics.Information.Discrete.Entropy where
 
+import Data.Function.Memoize
 import Data.Matrix
 import Statistics.Information.Utils.List
 
 entropy :: Eq a => Int -> Matrix a -> Double
-entropy base xs =
+entropy = memoize $ \base xs ->
   -(sum (map elog . hist . toLists $ xs)) / log (fromIntegral base)
   where
     elog x | x <= 0.0 = 0
