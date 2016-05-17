@@ -12,7 +12,12 @@ columns xs = [getCol i xs | i <- [1..ncols xs]]
 
 rowExtend :: Matrix a -> Int -> Matrix a
 rowExtend xs n =
-  remRows <-> Prelude.foldr (<->) xs (repeatN (completions - 1) xs) where
+  if remainder > 0 then
+    remRows <-> Prelude.foldr (<->) xs (repeatN (completions - 1) xs)
+  else
+    Prelude.foldr (<->) xs (repeatN (completions - 1) xs)
+  where
     completions = n `quot` nrows xs
     remRows = fromLists [Vector.toList $ getRow i xs |
-                         i <- [1..n `rem` nrows xs]]
+                         i <- [1..remainder]]
+    remainder = n `rem` nrows xs
