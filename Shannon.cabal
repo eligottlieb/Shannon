@@ -24,10 +24,12 @@ library
                        Statistics.Information.Discrete.TotalCorrelation,
                        Statistics.Information.Mixed.Entropy,
                        Statistics.Information.Mixed.MutualInfo,
-                       Statistics.Information.Mixed.TotalCorrelation
-  other-modules:       Statistics.Information.Utils.KNN,
+                       Statistics.Information.Mixed.TotalCorrelation,
+                       Statistics.Information.Utils.KNN,
+                       Statistics.Information.Utils.List,
                        Statistics.Information.Utils.Matrix,
                        Statistics.Information.Utils.Random
+  other-modules:
   -- other-extensions:
   build-depends:       base >=4.6 && <4.7, kdt >= 0.2.0, matrix, random,
                        math-functions, metric, vector
