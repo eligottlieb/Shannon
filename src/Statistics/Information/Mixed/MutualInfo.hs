@@ -11,7 +11,7 @@ import System.Random
 micd :: (RandomGen g, Eq a) => g -> Int -> Int -> Matrix Double -> Matrix a ->
         Double
 micd g k base xs ys | nrows xs == nrows ys =
-  hx - sum [ycontrib ypg | ypg <- yvals]
+  abs $ hx - sum [ycontrib ypg | ypg <- yvals]
   where
     (g1, g2) = split g
     hx = CE.entropy g1 k base xs
