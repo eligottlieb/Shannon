@@ -21,3 +21,10 @@ rowExtend xs n =
     remRows = fromLists [Vector.toList $ getRow i xs |
                          i <- [1..remainder]]
     remainder = n `rem` nrows xs
+
+residualMatrix :: Matrix a -> Int -> Matrix a
+xsiLeft xs i = submatrix 1 (nrows xs) 1 i xs
+xsiRight xs i = submatrix 1 (nrows xs) (i+1) (ncols xs) xs
+residualMatrix xs i | i == (ncols xs) = xsiLeft xs i
+residualMatrix xs 1 = xsiRight xs 1
+residualMatrix xs i = xsiLeft xs i <|> xsiRight xs i

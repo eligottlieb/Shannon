@@ -34,3 +34,13 @@ corex_mis g k base xs ys = sum mixs - mi_all where
   mi_all = mi g2 k base xs ys
   (g1, g2) = split g
   cols = (map colVector (columns xs)) `zip` (splitN (ncols xs) g1)
+
+residual :: RandomGen g => g -> Int -> Int -> Matrix Double -> Double
+residual g k base xs = sum $ [hlessxi i gi | (i, gi) <- igs] where
+  hlessxi i gi = let xi = (colVector $ getCol i xs) in
+    centropy gi k base xi $ residualMatrix xs i
+  igs = [1..(ncols xs)] `zip` (splitN (ncols xs) g)
+
+dtc :: RandomGen g => g -> Int -> Int -> Matrix Double -> Double
+dtc g k base xs = entropy g1 k base xs - residual g2 k base xs where
+  (g1, g2) = split g

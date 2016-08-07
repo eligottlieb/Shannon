@@ -22,3 +22,10 @@ corex_mis :: Eq a => Int -> Matrix a -> Matrix a -> Double
 corex_mis base xs ys = sum mixs - mi_all where
   mixs = [mi base col ys | col <- map colVector (columns xs)]
   mi_all = mi base xs ys
+
+residual :: Eq a => Int -> Matrix a -> Double
+residual base xs = sum $ [hlessxi i | i <- [1..(ncols xs)]] where
+  hlessxi i = centropy base (colVector $ getCol i xs) $ residualMatrix xs i
+
+dtc :: Eq a => Int -> Matrix a -> Double
+dtc base xs = entropy base xs - residual base xs
