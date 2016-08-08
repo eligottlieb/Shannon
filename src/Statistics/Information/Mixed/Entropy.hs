@@ -18,7 +18,9 @@ centropycd g k base xs ys = CE.entropy g1 k base xs - micd g2 k base xs ys where
 
 entropy :: (RandomGen g, Eq a) => g -> Int -> Int -> Matrix a ->
            Matrix Double -> Double
-entropy g k base xs ys = centropydc g1 k base xs ys +
-  centropycd g2 k base ys xs + midc g3 k base xs ys
+entropy g k base xs ys = hx + hy - ixy
   where
-    [g1, g2, g3] = splitN 3 g
+    (g1, g2) = split g
+    hx = DE.entropy base xs
+    hy = CE.entropy g1 k base ys
+    ixy = midc g2 k base xs ys
